@@ -68,7 +68,7 @@ export default async function Home() {
                             <Link href="/imoveis" className="btn btn-primary" style={{ padding: '0.875rem 2rem', fontSize: '1rem' }}>
                                 Ver todos os imóveis &rarr;
                             </Link>
-                            <a href={getWhatsappLink('Vim pelo site, quero falar no WhatsApp')} target="_blank" className="btn" style={{
+                            <a href={getWhatsappLink('Atendimento Geral')} target="_blank" className="btn" style={{
                                 backgroundColor: 'white',
                                 border: '1px solid var(--border)',
                                 color: 'var(--foreground)',

@@ -1,36 +1,188 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🚨 ATENÇÃO – PASSOS OBRIGATÓRIOS ANTES DE RODAR O PROJETO
 
-## Getting Started
+> ✅ **ANTES DE QUALQUER COISA, VOCÊ PRECISA CONFIGURAR AS CHAVES:**
+>
+> 1. **Copiar o arquivo de exemplo de ambiente e criar o `.env.local`:**
+>    ```bash
+>    cp .env.example .env.local
+>    ```
+>
+> 2. **Abrir o arquivo `.env.local`** e substituir os valores de:
+>    - `NEXT_PUBLIC_SUPABASE_URL`
+>    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+>    - `NEXT_PUBLIC_WHATSAPP_PHONE`
+>
+> 3. ⚠️ **IMPORTANTE – SUPABASE / TOMIK OS / CRM:**
+>    - As chaves do Supabase (`URL` e `ANON KEY`) devem ser as **mesmas** que você já usa no **Tomik OS (CRM/ERP)**.  
+>    - Isso garante que o site e o seu CRM estejam usando o **mesmo banco de dados** (`produtos_servicos`).
+>
+> 4. ⚠️ **IMPORTANTE – WHATSAPP:**
+>    - Em `NEXT_PUBLIC_WHATSAPP_PHONE` coloque o **número do WhatsApp que será usado no atendimento**, no formato:  
+>      `5511999999999` (sem `+`, sem parênteses, sem traços).
 
-First, run the development server:
+Se você **não fizer esses passos**, o site **não vai conectar** no seu Supabase / Tomik OS e os imóveis **não vão aparecer**.
 
-```bash
+---
+
+# 🏡 Imobiliária – Template para Alunos
+
+Este é um template de site de imobiliária desenvolvido com [Next.js](https://nextjs.org/) e [Supabase](https://supabase.com/).
+
+O projeto lista imóveis dinamicamente a partir da tabela `produtos_servicos` e direciona interessados para o WhatsApp, usando o **mesmo banco de dados que o Tomik OS (CRM/ERP)**.
+
+---
+
+## ✨ Funcionalidades
+
+- **Home**: Destaques e apresentação da imobiliária.  
+- **Listagem de Imóveis**: Filtros e grid de imóveis disponíveis.  
+- **Detalhes do Imóvel**: Informações completas e botão de contato.  
+- **Integração Supabase**: Leitura de dados em tempo real a partir da tabela `produtos_servicos`.  
+- **Contato via WhatsApp**: Links gerados automaticamente com mensagem personalizada.
+
+---
+
+## 🧰 Requisitos
+
+Você vai precisar de:
+
+- [Node.js](https://nodejs.org/) – versão **18 ou superior**  
+- Conta no [Supabase](https://supabase.com/)  
+- Conta no [GitHub](https://github.com/)  
+- Conta na [Vercel](https://vercel.com/) – para deploy  
+- Acesso ao **Tomik OS / CRM**, que já usa o projeto Supabase com a tabela `produtos_servicos`
+
+---
+
+## 🚀 Como rodar localmente
+
+Clone o repositório:
+
+# 💻 PASSO A PASSO COMPLETO – SETUP DO PROJETO IMOBILIÁRIA
+
+# 1️⃣ CLONAR O REPOSITÓRIO
+git clone https://github.com/ViniciusAutomotikLabs/Imobili-ria-Alunos.git
+cd Imobili-ria-Alunos
+
+# 2️⃣ INSTALAR AS DEPENDÊNCIAS
+npm install
+
+# 3️⃣ CONFIGURAR AS VARIÁVEIS DE AMBIENTE
+cp .env.example .env.local
+
+# 👉 Agora abra o arquivo .env.local e preencha com os dados do SEU projeto Supabase (o mesmo do Tomik OS):
+
+# 🔑 NEXT_PUBLIC_SUPABASE_URL
+#    - Vá no painel do Supabase → seu projeto → Settings → API → copie a "Project URL".
+
+# 🔑 NEXT_PUBLIC_SUPABASE_ANON_KEY
+#    - No mesmo lugar (Settings → API), copie a "anon public key".
+
+# 📱 NEXT_PUBLIC_WHATSAPP_PHONE
+#    - Número de WhatsApp que vai receber os contatos dos imóveis, no formato:
+#      5511999999999  (código do país + DDD + número, tudo junto – sem +, sem parênteses, sem traços)
+
+# 🔁 LEMBRETE IMPORTANTE:
+# - Use as MESMAS credenciais do Supabase que o Tomik OS usa.
+# - Assim, o site puxa os MESMOS imóveis que o seu CRM/ERP enxerga (tabela produtos_servicos).
+
+# 4️⃣ RODAR O SERVIDOR DE DESENVOLVIMENTO
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+# 🌐 ACESSAR O SITE LOCAL
+# Abra no navegador:
+# http://localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# ─────────────────────────────────────────────────────────
+# 🗄️ CONFIGURAÇÃO DO SUPABASE (VISÃO GERAL)
+# ─────────────────────────────────────────────────────────
 
-## Learn More
+# Durante a aula será explicado como:
+#   • Garantir que o seu projeto Supabase já está configurado pelo Tomik OS;
+#   • Entender a tabela produtos_servicos;
+#   • Inserir ou visualizar os imóveis cadastrados.
 
-To learn more about Next.js, take a look at the following resources:
+# ✅ Resumo do que o site espera:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#   • Tabela: produtos_servicos
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#   • Campos essenciais (colunas importantes):
+#       - id
+#       - nome
+#       - preco_base
+#       - descricao
+#       - imagens_urls
+#       - categoria           (para o site, deve ser 'Imóvel')
+#       - status              (ex.: 'ativo')
+#       - ativo               (boolean)
+#       - custom_fields       (JSON para detalhes como dormitórios, vagas, área, cidade, etc.)
 
-## Deploy on Vercel
+#   • Filtros usados pelo site nas consultas:
+#       - tipo = 'produto'
+#       - categoria = 'Imóvel'
+#       - status = 'ativo'
+#       - ativo = true
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+# ─────────────────────────────────────────────────────────
+# 🌐 DEPLOY NA VERCEL
+# ─────────────────────────────────────────────────────────
+
+# Depois que o projeto estiver rodando localmente:
+
+# 1) Suba seu código para um repositório no SEU GitHub (pode ser fork deste).
+
+# 2) Acesse a Vercel e clique em:  "Add New Project"
+
+# 3) Selecione o repositório do GitHub com este projeto.
+
+# 4) Em "Environment Variables", adicione as MESMAS variáveis do .env.local:
+#       - NEXT_PUBLIC_SUPABASE_URL
+#       - NEXT_PUBLIC_SUPABASE_ANON_KEY
+#       - NEXT_PUBLIC_WHATSAPP_PHONE
+
+# 5) Clique em "Deploy" e aguarde.
+
+# 6) Acesse a URL gerada pela Vercel e teste o site online. 🚀
+
+
+# ─────────────────────────────────────────────────────────
+# 🎨 CUSTOMIZAÇÕES SUGERIDAS
+# ─────────────────────────────────────────────────────────
+
+# Depois que tudo estiver funcionando, você pode personalizar:
+
+# 🎨 Cores e identidade visual
+#   - Ajuste em: app/globals.css
+#   - Ou direto nos componentes de layout.
+
+# 📝 Textos da Home
+#   - Arquivo principal: app/page.tsx
+#   - Mude títulos, subtítulos, chamadas de ação.
+
+# 🔍 Filtros de imóveis
+#   - Explore: lib/imoveis.ts
+#   - Veja como as consultas ao Supabase são feitas e adicione novos filtros.
+
+# 💬 Mensagem do WhatsApp
+#   - O texto padrão é montado no helper:
+#       lib/whatsapp.ts
+#     pela função:
+#       getWhatsappLink()
+
+
+# ─────────────────────────────────────────────────────────
+# 📌 RESUMO RÁPIDO PARA O ALUNO
+# ─────────────────────────────────────────────────────────
+
+# 1. Clonar o repositório.
+# 2. Rodar: npm install
+# 3. Copiar: .env.example → .env.local
+# 4. Preencher as envs com os dados do MESMO Supabase usado no Tomik OS + seu WhatsApp.
+# 5. Rodar: npm run dev
+# 6. Acessar http://localhost:3000 e começar a personalizar.
+
+# ─────────────────────────────────────────────────────────
+
+# 🎓 Bom estudo e boas vendas de imóveis! 🚀🏡
